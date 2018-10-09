@@ -1,6 +1,15 @@
 run:
 	docker-compose up
 
+rails/console:
+	docker-compose run web rails c
+
+rails/routes:
+	docker-compose run web rails routes
+
+rails/migrate:
+	docker-compose run web rails db:migrate
+
 docker/build: docker-compose.yml
 	docker-compose build
 
