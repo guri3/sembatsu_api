@@ -4,8 +4,8 @@
 
 ```sh
 # 準備
-$ git clone hoge
-$ cd hoge
+$ git clone git@github.com:guri3/sembatsu_api.git
+$ cd sembatsu_api
 $ make install # 初回は結構時間がかかります
 
 # 起動
