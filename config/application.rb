@@ -15,7 +15,7 @@ module Sembatsu
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-    # @TODO 適切な設定をする必要あり
+    # TODO 適切な設定をする必要あり
     config.middleware.use Rack::Cors do
       allow do
         origins '*'

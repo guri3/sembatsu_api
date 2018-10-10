@@ -26,4 +26,4 @@ docker/clean:
 	docker-compose rm
 
 docker/bash:
-	docker exec -it $(shell docker-compose ps -q) bash
+	docker exec -it sembatsu_web_1 bash
