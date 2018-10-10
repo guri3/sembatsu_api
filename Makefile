@@ -1,17 +1,29 @@
+DRUN:=docker-compose run web
+
+install:
+	make docker/build \
+	&& make rails/install
+
 run:
 	docker-compose up
 
 rails/console:
-	docker-compose run web rails c
+	$(DRUN) rails c
 
 rails/routes:
-	docker-compose run web rails routes
+	$(DRUN) rails routes
 
 rails/migrate:
-	docker-compose run web rails db:migrate
+	$(DRUN) rails db:migrate
+
+# 一度に実行するとエラーを吐くので暫定別で
+rails/install:
+	$(DRUN) rails db:create \
+	&& $(DRUN) rails db:migrate \
+	&& $(DRUN) rails db:seed
 
 rails/reinstall:
-	docker-compose run web rails db:reinstall
+	$(DRUN) rails db:reinstall
 
 docker/build: docker-compose.yml
 	docker-compose build
