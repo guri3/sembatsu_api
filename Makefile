@@ -10,6 +10,9 @@ rails/routes:
 rails/migrate:
 	docker-compose run web rails db:migrate
 
+rails/reinstall:
+	docker-compose run web rails db:reinstall
+
 docker/build: docker-compose.yml
 	docker-compose build
 
