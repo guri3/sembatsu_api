@@ -3,6 +3,7 @@ class CreateNewrooms < ActiveRecord::Migration[5.2]
     create_table :newrooms do |t|
       t.references :host, foreign_key: true
       t.string :location, null:false
+      t.integer :price, null:false
       t.string :city, null: false
       t.string :country, null: false
       t.boolean :wifi
