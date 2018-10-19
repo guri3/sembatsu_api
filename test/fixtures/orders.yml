@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  guest: one
+  newroom: one
+  orderdate: 2018-10-19
+  totalcost: 1
+  howmanynights: 1
+
+two:
+  guest: two
+  newroom: two
+  orderdate: 2018-10-19
+  totalcost: 1
+  howmanynights: 1
