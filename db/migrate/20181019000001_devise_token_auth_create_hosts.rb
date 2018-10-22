@@ -44,6 +44,13 @@ class DeviseTokenAuthCreateHosts < ActiveRecord::Migration[5.2]
       ## Tokens
       t.json :tokens
 
+      ## opt villa
+      t.string :gender, null: false
+      t.date   :birthday, null: false
+      t.string :city, null: false
+      t.string :country, null: false
+      t.string :rental_location, null: false
+
       t.timestamps
     end
 
