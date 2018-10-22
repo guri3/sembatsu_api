@@ -1,8 +1,8 @@
 class CreateHostreviews < ActiveRecord::Migration[5.2]
   def change
-    create_table :hostreviews do |t|
+    create_table :host_reviews do |t|
       t.references :host, foreign_key: true
-      t.string :review
+      t.string     :body
 
       t.timestamps
     end

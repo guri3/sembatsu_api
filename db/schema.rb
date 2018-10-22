@@ -10,20 +10,83 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_10_034728) do
+ActiveRecord::Schema.define(version: 2018_10_19_034655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "rooms", force: :cascade do |t|
-    t.string "title", null: false
-    t.integer "price", null: false
-    t.decimal "rating", precision: 2, scale: 1, null: false
-    t.integer "occupancy", null: false
-    t.string "prefecture", null: false
-    t.string "address", null: false
+  create_table "guests", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "gender", null: false
+    t.date "birthday", null: false
+    t.string "emailaddress", null: false
+    t.string "city", null: false
+    t.string "country", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "host_reviews", force: :cascade do |t|
+    t.bigint "host_id"
+    t.string "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["host_id"], name: "index_host_reviews_on_host_id"
+  end
+
+  create_table "hosts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "gender", null: false
+    t.string "emailaddress", null: false
+    t.string "city", null: false
+    t.string "country", null: false
+    t.string "rentallocation", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.bigint "order_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_options_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "guest_id"
+    t.bigint "room_id"
+    t.date "order_date", null: false
+    t.integer "total_cost", null: false
+    t.integer "howmany_nights", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_orders_on_guest_id"
+    t.index ["room_id"], name: "index_orders_on_room_id"
+  end
+
+  create_table "room_reviews", force: :cascade do |t|
+    t.bigint "room_id"
+    t.string "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_room_reviews_on_room_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.bigint "host_id"
+    t.string "location", null: false
+    t.integer "price", null: false
+    t.string "city", null: false
+    t.string "country", null: false
+    t.boolean "wifi"
+    t.integer "bed_num"
+    t.integer "bath_room_num"
+    t.boolean "wash_machine"
+    t.boolean "kitchen"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["host_id"], name: "index_rooms_on_host_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,4 +119,10 @@ ActiveRecord::Schema.define(version: 2018_10_10_034728) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "host_reviews", "hosts"
+  add_foreign_key "options", "orders"
+  add_foreign_key "orders", "guests"
+  add_foreign_key "orders", "rooms"
+  add_foreign_key "room_reviews", "rooms"
+  add_foreign_key "rooms", "hosts"
 end

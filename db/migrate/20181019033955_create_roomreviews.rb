@@ -1,8 +1,8 @@
 class CreateRoomreviews < ActiveRecord::Migration[5.2]
   def change
-    create_table :roomreviews do |t|
-      t.references :newroom, foreign_key: true
-      t.string :review
+    create_table :room_reviews do |t|
+      t.references :room, foreign_key: true
+      t.string     :body
 
       t.timestamps
     end
