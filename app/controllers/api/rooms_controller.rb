@@ -4,6 +4,7 @@ class Api::RoomsController < ApplicationController
       {
         id: 1,
         title: "湘南の海が一望できる別荘で素敵な休日を過ごしませんか？",
+        image_url: 'https://ateamateam.herokuapp.com/images/sample_room.jpg',
         prefecture: "神奈川県",
         city: "箱根",
         max_stay_num: 3,
@@ -12,6 +13,7 @@ class Api::RoomsController < ApplicationController
       }, {
         id: 2,
         title: "箱根一番人気民泊！気持ちいい朝日で最高の1日を！",
+        image_url: 'https://ateamateam.herokuapp.com/images/sample_room.jpg',
         prefecture: "神奈川県",
         city: "箱根",
         max_stay_num: 5,
@@ -20,6 +22,7 @@ class Api::RoomsController < ApplicationController
       }, {
         id: 3,
         title: "箱根一番人気民泊！気持ちいい朝日で最高の1日を！",
+        image_url: 'https://ateamateam.herokuapp.com/images/sample_room.jpg',
         prefecture: "神奈川県",
         city: "箱根",
         max_stay_num: 5,
@@ -28,6 +31,7 @@ class Api::RoomsController < ApplicationController
       }, {
         id: 4,
         title: "箱根一番人気民泊！気持ちいい朝日で最高の1日を！",
+        image_url: 'https://ateamateam.herokuapp.com/images/sample_room.jpg',
         prefecture: "神奈川県",
         city: "箱根",
         max_stay_num: 5,
@@ -36,6 +40,7 @@ class Api::RoomsController < ApplicationController
       }, {
         id: 5,
         title: "箱根一番人気民泊！気持ちいい朝日で最高の1日を！",
+        image_url: 'https://ateamateam.herokuapp.com/images/sample_room.jpg',
         prefecture: "神奈川県",
         city: "箱根",
         max_stay_num: 5,
@@ -44,6 +49,7 @@ class Api::RoomsController < ApplicationController
       }, {
         id: 6,
         title: "箱根一番人気民泊！気持ちいい朝日で最高の1日を！",
+        image_url: 'https://ateamateam.herokuapp.com/images/sample_room.jpg',
         prefecture: "神奈川県",
         city: "箱根",
         max_stay_num: 5,
@@ -52,6 +58,7 @@ class Api::RoomsController < ApplicationController
       }, {
         id: 7,
         title: "箱根一番人気民泊！気持ちいい朝日で最高の1日を！",
+        image_url: 'https://ateamateam.herokuapp.com/images/sample_room.jpg',
         prefecture: "神奈川県",
         city: "箱根",
         max_stay_num: 5,
