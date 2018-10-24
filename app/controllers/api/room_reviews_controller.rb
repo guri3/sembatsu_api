@@ -8,17 +8,17 @@ class Api::RoomReviewsController < ApplicationController
         created_at: Time.current.ago(1.week)
       }, {
         id: 2,
-        review: 5.0,
+        review: 4.2,
         body: "おすすめです。",
         created_at: Time.current.ago(2.week)
       }, {
         id: 3,
-        review: 3.0,
+        review: 3.3,
         body: "おすすめです。",
         created_at: Time.current.ago(3.week)
       }, {
         id: 4,
-        review: 2.0,
+        review: 2.2,
         body: "おすすめです。",
         created_at: Time.current.ago(4.week)
       }, {
