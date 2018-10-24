@@ -1,14 +1,14 @@
 # == Schema Information
 #
-# Table name: options
+# Table name: room_reviews
 #
 #  id         :bigint(8)        not null, primary key
-#  order_id   :bigint(8)
-#  name       :string
+#  room_id    :bigint(8)
+#  body       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Option < ApplicationRecord
-  belongs_to :order
+class RoomReview < ApplicationRecord
+  belongs_to :room
 end
