@@ -1,14 +1,14 @@
 # == Schema Information
 #
-# Table name: options
+# Table name: host_reviews
 #
 #  id         :bigint(8)        not null, primary key
-#  order_id   :bigint(8)
-#  name       :string
+#  host_id    :bigint(8)
+#  body       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Option < ApplicationRecord
-  belongs_to :order
+class HostReview < ApplicationRecord
+  belongs_to :host
 end
