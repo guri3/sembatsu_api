@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  host: one
+  location: MyString
+  city: MyString
+  country: MyString
+  wifi: false
+  bednumber: 1
+  bathroomnumber: 1
+  washmachine: false
+  kitchen: false
+
+two:
+  host: two
+  location: MyString
+  city: MyString
+  country: MyString
+  wifi: false
+  bednumber: 1
+  bathroomnumber: 1
+  washmachine: false
+  kitchen: false
