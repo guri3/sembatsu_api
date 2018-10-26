@@ -47,7 +47,7 @@ class Room < ApplicationRecord
   # スコープ
 
   # クラスメソッド
-  def self.samle_rooms
+  def self.sample_rooms
     [
       {
         id: 1,
