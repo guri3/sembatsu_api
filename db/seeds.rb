@@ -129,7 +129,7 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access,
+      access: access1,
       price: 35000,
     },
     {
@@ -177,7 +177,7 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access,
+      access: access1,
       price: 35000,
     },
     {
@@ -201,7 +201,7 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access,
+      access: access1,
       price: 35000,
     },
     {
@@ -225,7 +225,7 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access,
+      access: access1,
       price: 35000,
     },
     {
@@ -249,7 +249,7 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access,
+      access: access1,
       price: 35000,
     },
     {
@@ -273,7 +273,7 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access,
+      access: access1,
       price: 35000,
     }
   ]
