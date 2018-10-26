@@ -6,5 +6,6 @@ Rails.application.routes.draw do
       resources :room_reviews, only: [:index]
     end
     get '/options', to: 'rooms#options'
+    # post 'reservation', to: 'rooms#reservation'
   end
 end
