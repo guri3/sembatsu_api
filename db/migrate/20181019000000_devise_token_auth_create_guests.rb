@@ -45,10 +45,10 @@ class DeviseTokenAuthCreateGuests < ActiveRecord::Migration[5.2]
       t.json :tokens
 
       ## opt villa
-      t.string :gender, null: false
-      t.date   :birthday, null: false
-      t.string :city, null: false
-      t.string :country, null: false
+      t.string :gender
+      t.date   :birthday
+      t.string :city
+      t.string :country
 
       t.timestamps
     end
