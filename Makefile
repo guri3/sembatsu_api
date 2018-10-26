@@ -7,7 +7,7 @@ install:
 run:
 	docker-compose up
 
-rails/console:
+rails/c:
 	$(DRUN) rails c
 
 rails/routes:
@@ -24,6 +24,9 @@ rails/install:
 
 rails/reinstall:
 	$(DRUN) rails db:reinstall
+
+rails/annotate:
+	$(DRUN) annotate
 
 docker/build: docker-compose.yml
 	docker-compose build

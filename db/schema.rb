@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_19_034655) do
+ActiveRecord::Schema.define(version: 2018_10_19_032707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,10 +37,10 @@ ActiveRecord::Schema.define(version: 2018_10_19_034655) do
     t.string "image"
     t.string "email"
     t.json "tokens"
-    t.string "gender", null: false
-    t.date "birthday", null: false
-    t.string "city", null: false
-    t.string "country", null: false
+    t.string "gender"
+    t.date "birthday"
+    t.string "city"
+    t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_guests_on_confirmation_token", unique: true
@@ -79,11 +79,11 @@ ActiveRecord::Schema.define(version: 2018_10_19_034655) do
     t.string "image"
     t.string "email"
     t.json "tokens"
-    t.string "gender", null: false
-    t.date "birthday", null: false
-    t.string "city", null: false
-    t.string "country", null: false
-    t.string "rental_location", null: false
+    t.string "gender"
+    t.date "birthday"
+    t.string "city"
+    t.string "country"
+    t.string "rental_location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_hosts_on_confirmation_token", unique: true
@@ -93,28 +93,59 @@ ActiveRecord::Schema.define(version: 2018_10_19_034655) do
   end
 
   create_table "options", force: :cascade do |t|
-    t.bigint "order_id"
-    t.string "name"
+    t.string "name", null: false
+    t.string "image_url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_options_on_order_id"
   end
 
-  create_table "orders", force: :cascade do |t|
-    t.bigint "guest_id"
-    t.bigint "room_id"
-    t.date "order_date", null: false
-    t.integer "total_cost", null: false
-    t.integer "howmany_nights", null: false
+  create_table "reserve_options", force: :cascade do |t|
+    t.bigint "reserve_id"
+    t.bigint "option_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["guest_id"], name: "index_orders_on_guest_id"
-    t.index ["room_id"], name: "index_orders_on_room_id"
+    t.index ["option_id"], name: "index_reserve_options_on_option_id"
+    t.index ["reserve_id"], name: "index_reserve_options_on_reserve_id"
+  end
+
+  create_table "reserved_dates", force: :cascade do |t|
+    t.bigint "room_id"
+    t.date "reserved_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_reserved_dates_on_room_id"
+  end
+
+  create_table "reserves", force: :cascade do |t|
+    t.bigint "guest_id"
+    t.bigint "room_id"
+    t.date "from", null: false
+    t.date "to", null: false
+    t.date "reserve_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_reserves_on_guest_id"
+    t.index ["room_id"], name: "index_reserves_on_room_id"
+  end
+
+  create_table "room_options", force: :cascade do |t|
+    t.bigint "room_id"
+    t.bigint "option_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_id"], name: "index_room_options_on_option_id"
+    t.index ["room_id"], name: "index_room_options_on_room_id"
   end
 
   create_table "room_reviews", force: :cascade do |t|
     t.bigint "room_id"
-    t.string "body"
+    t.decimal "satisfaction", precision: 2, scale: 1
+    t.decimal "cleanliness", precision: 2, scale: 1
+    t.decimal "cost_performance", precision: 2, scale: 1
+    t.decimal "amenity", precision: 2, scale: 1
+    t.decimal "location", precision: 2, scale: 1
+    t.decimal "access", precision: 2, scale: 1
+    t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_room_reviews_on_room_id"
@@ -122,24 +153,41 @@ ActiveRecord::Schema.define(version: 2018_10_19_034655) do
 
   create_table "rooms", force: :cascade do |t|
     t.bigint "host_id"
-    t.string "location", null: false
-    t.integer "price", null: false
+    t.string "title", null: false
+    t.string "registration_id", null: false
+    t.text "body", null: false
+    t.string "image_url", null: false
+    t.string "prefecture", null: false
     t.string "city", null: false
-    t.string "country", null: false
-    t.boolean "wifi"
-    t.integer "bed_num"
-    t.integer "bath_room_num"
-    t.boolean "wash_machine"
-    t.boolean "kitchen"
+    t.decimal "latitude", precision: 9, scale: 6
+    t.decimal "longitude", precision: 9, scale: 6
+    t.integer "max_stay_num", null: false
+    t.string "check_in_time", null: false
+    t.string "check_out_time", null: false
+    t.integer "bed_room_num", null: false
+    t.integer "bed_num", null: false
+    t.integer "toilet_num", null: false
+    t.integer "kitchen_num", null: false
+    t.string "facilyty", default: "", null: false
+    t.string "amenity", default: "", null: false
+    t.string "pet", default: "", null: false
+    t.text "child", default: "", null: false
+    t.string "access", default: "", null: false
+    t.integer "price", null: false
+    t.decimal "review", precision: 2, scale: 1, default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["host_id"], name: "index_rooms_on_host_id"
   end
 
   add_foreign_key "host_reviews", "hosts"
-  add_foreign_key "options", "orders"
-  add_foreign_key "orders", "guests"
-  add_foreign_key "orders", "rooms"
+  add_foreign_key "reserve_options", "options"
+  add_foreign_key "reserve_options", "reserves", column: "reserve_id"
+  add_foreign_key "reserved_dates", "rooms"
+  add_foreign_key "reserves", "guests"
+  add_foreign_key "reserves", "rooms"
+  add_foreign_key "room_options", "options"
+  add_foreign_key "room_options", "rooms"
   add_foreign_key "room_reviews", "rooms"
   add_foreign_key "rooms", "hosts"
 end

@@ -1,114 +1,113 @@
 class Api::RoomsController < ApplicationController
   def index
-    room = {
-      title: "箱根一番人気民泊！気持ちいい朝日で最高の1日を！",
-      prefecture: "神奈川県",
-      city: "箱根",
-      stay_num: 1,
-      max_stay_num: 5,
-      price: 35000,
-      review: 4.0
-    }
-    @rooms = [
-      {
-        title: "湘南の海が一望できる別荘で素敵な休日を過ごしませんか？",
-        prefecture: "神奈川県",
-        city: "箱根",
-        stay_num: 1,
-        max_stay_num: 3,
-        price: 35000,
-        review: 4.0
-      }
-    ]
-    6.times do
-      @rooms.push(room)
-    end
+    @rooms = Room.all
 
-    # カテゴリごとの部屋を抜き出す必要があったら処理を行う
-    # 現状全て同じものを返している
+    # TODO 要リファクタリング
     if params[:keyword].present?
       case params[:keyword]
-      when 'scenery'
-        render json: @rooms
+      when 'recommend'
+        @rooms = @rooms.order('review DESC')
+      when 'niceview'
+        id_location_set = []
+        @rooms.each do |room|
+          id_location_set << [room.id, (room.room_reviews.map(&:location).inject(:+).to_f/room.room_reviews.size).round(1)]
+        end
+        id_location_set = id_location_set.sort{|a, b| b[1] <=> a[1]}
+        ids = id_location_set.map{|o| o[0]}
+        @rooms = ids.collect {|id| @rooms.detect {|x| x.id == id.to_i}}
       when 'inexpensive'
-        render json: @rooms
+        @rooms = @rooms.order('price DESC')
       when 'accessible'
-        render json: @rooms
+        id_access_set = []
+        @rooms.each do |room|
+          id_access_set << [room.id, (room.room_reviews.map(&:access).inject(:+).to_f/room.room_reviews.size).round(1)]
+        end
+        id_access_set = id_access_set.sort{|a, b| b[1] <=> a[1]}
+        ids = id_access_set.map{|o| o[0]}
+        @rooms = ids.collect {|id| @rooms.detect {|x| x.id == id.to_i}}
       when 'satisfaction'
-        render json: @rooms
+        id_satisfaction_set = []
+        @rooms.each do |room|
+          id_satisfaction_set << [room.id, (room.room_reviews.map(&:satisfaction).inject(:+).to_f/room.room_reviews.size).round(1)]
+        end
+        id_satisfaction_set = id_satisfaction_set.sort{|a, b| b[1] <=> a[1]}
+        ids = id_satisfaction_set.map{|o| o[0]}
+        @rooms = ids.collect {|id| @rooms.detect {|x| x.id == id.to_i}}
       when 'clean'
-        render json: @rooms
+        id_cleanliness_set = []
+        @rooms.each do |room|
+          id_cleanliness_set << [room.id, (room.room_reviews.map(&:cleanliness).inject(:+).to_f/room.room_reviews.size).round(1)]
+        end
+        id_cleanliness_set = id_cleanliness_set.sort{|a, b| b[1] <=> a[1]}
+        ids = id_cleanliness_set.map{|o| o[0]}
+        @rooms = ids.collect {|id| @rooms.detect {|x| x.id == id.to_i}}
       when 'equipment'
-        render json: @rooms
-      else
-        render json: @rooms
+        id_amenity_set = []
+        @rooms.each do |room|
+          id_amenity_set << [room.id, (room.room_reviews.map(&:amenity).inject(:+).to_f/room.room_reviews.size).round(1)]
+        end
+        id_amenity_set = id_amenity_set.sort{|a, b| b[1] <=> a[1]}
+        ids = id_amenity_set.map{|o| o[0]}
+        @rooms = ids.collect {|id| @rooms.detect {|x| x.id == id.to_i}}
       end
     else
-      render json: @rooms
+      @rooms = @rooms.order(:id)
     end
+
+    if params[:place].present?
+      ids = @rooms.where('prefecture LIKE ?', "%#{params[:place]}%").ids
+      ids << @rooms.where('city LIKE ?', "%#{prams[:place]}%").ids
+      @rooms = @rooms.where(id: ids.flatten)
+    end
+
+    if params[:checkin].present? && params[:checkout].present?
+      ids = []
+      @rooms.each do |room|
+        checkin = Date.parse(params[:checkin])
+        checkout = Date.parse(params[:checkout])
+        check = (checkin..checkout).to_a
+        flg = true
+        room.reserved_dates.map(&:reserved_date).each do |rd|
+          if check.include?(rd)
+            flg = false
+            break
+          end
+        end
+        ids << room.id if flg == true
+      end
+      @rooms = @rooms.where(id: ids)
+    end
+
+    if params[:stay_num].present?
+      @rooms = @rooms.select{|room| room.max_stay_num >= params[:stay_num].to_i}
+    end
+
+    if params[:max_price].present?
+      @rooms = @rooms.select{|room| params[:max_price].to_i >= room.price}
+    end
+
+    if params[:option_id].present?
+      ids = Option.find(params[:option_id]).rooms.ids
+      @rooms = @rooms.where(id: ids)
+    end
+
+    if params[:limit].present?
+      @rooms = @rooms.limit(params[:limit])
+    end
+
+    render 'index', formats: 'json', handlers: 'jbuilder'
+    # end
   end
 
   def show
-    body = <<~EOS
-      全てのナチュラル&マッドウォールハウス！立石東京駅周辺の綺麗な近所。
-      多くのバーは、戦争直後から駅の近くに残っています。
-      1940年代に東京がどのようなものだったかを感じることができます。
-      主要スポットへのアクセス良好(15分~50分)
-    EOS
-    access = <<~EOS
-      バス停まで歩いておよそ17分。
-      駐車場は無料です。6台は停められる余裕があります。
-    EOS
-    @room = {
-      title: '湘南の海が一望できる別荘で素敵な休日を過ごしませんか？',
-      registration_id: 'M130002147',
-      body: body,
-      prefecture: '神奈川県',
-      city: '箱根',
-      stay_num: 1,
-      max_stay_num: 5,
-      check_in_time: '9:00',
-      check_out_time: '~24:00',
-      facilyty: %w(Wi-Fi 洗濯機),
-      amenity: [
-        "シャンプー・リンス",
-        "ボディソープ・石鹸",
-        "ボディタオル",
-        "ハミガキセット",
-        "シャワーキャップ",
-        "ドライヤー"
-      ],
-      pet: "available",
-      child: "available",
-      access: access,
-      price: 35000,
-      reviews: {
-        satisfaction: 4.0,
-        cleanliness: 4.0,
-        cost_performance: 4.0,
-        amenity: 4.0,
-        location: 4.0,
-        access: 4.0
-      },
-      room_revies: [
-        {
-          review: 4.0,
-          body: "おすすめです。"
-        }, {
-          review: 4.0,
-          body: "おすすめです。"
-        },
-      ]
-    }
-    render json: @room
+    # @room = Room.sample_room
+    @room = Room.find(params[:id])
+
+    render 'show', formats: 'json', handlers: 'jbuilder'
   end
 
   def options
-    @options = [
-      { title: "レンタルシップ" },
-      { title: "イタリアンディナー" },
-      { title: "マッサージ・エステ" }
-    ]
+    @options = Option.all
 
     render json: @options
   end

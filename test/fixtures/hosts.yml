@@ -24,11 +24,11 @@
 #  image                  :string
 #  email                  :string
 #  tokens                 :json
-#  gender                 :string           not null
-#  birthday               :date             not null
-#  city                   :string           not null
-#  country                :string           not null
-#  rental_location        :string           not null
+#  gender                 :string
+#  birthday               :date
+#  city                   :string
+#  country                :string
+#  rental_location        :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #

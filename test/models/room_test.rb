@@ -2,19 +2,32 @@
 #
 # Table name: rooms
 #
-#  id            :bigint(8)        not null, primary key
-#  host_id       :bigint(8)
-#  location      :string           not null
-#  price         :integer          not null
-#  city          :string           not null
-#  country       :string           not null
-#  wifi          :boolean
-#  bed_num       :integer
-#  bath_room_num :integer
-#  wash_machine  :boolean
-#  kitchen       :boolean
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id              :bigint(8)        not null, primary key
+#  host_id         :bigint(8)
+#  title           :string           not null
+#  registration_id :string           not null
+#  body            :text             not null
+#  image_url       :string           not null
+#  prefecture      :string           not null
+#  city            :string           not null
+#  latitude        :decimal(9, 6)
+#  longitude       :decimal(9, 6)
+#  max_stay_num    :integer          not null
+#  check_in_time   :string           not null
+#  check_out_time  :string           not null
+#  bed_room_num    :integer          not null
+#  bed_num         :integer          not null
+#  toilet_num      :integer          not null
+#  kitchen_num     :integer          not null
+#  facilyty        :string           default(""), not null
+#  amenity         :string           default(""), not null
+#  pet             :string           default(""), not null
+#  child           :text             default(""), not null
+#  access          :string           default(""), not null
+#  price           :integer          not null
+#  review          :decimal(2, 1)    default(0.0), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 
 require 'test_helper'
