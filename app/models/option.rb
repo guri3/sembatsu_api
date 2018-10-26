@@ -11,8 +11,8 @@
 
 class Option < ApplicationRecord
   # 関連
-  has_many :rooms, through: :room_options
   has_many :room_options
+  has_many :rooms, through: :room_options
 
   # アクセサ
 

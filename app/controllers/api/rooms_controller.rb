@@ -55,21 +55,40 @@ class Api::RoomsController < ApplicationController
     end
 
     if params[:place].present?
+      ids = @rooms.where('prefecture LIKE ?', "%#{params[:place]}%").ids
+      ids << @rooms.where('city LIKE ?', "%#{prams[:place]}%").ids
+      @rooms = @rooms.where(id: ids.flatten)
     end
 
-    if params[:checkin].present?
-    end
-
-    if params[:checkout].present?
+    if params[:checkin].present? && params[:checkout].present?
+      ids = []
+      @rooms.each do |room|
+        checkin = Date.parse(params[:checkin])
+        checkout = Date.parse(params[:checkout])
+        check = (checkin..checkout).to_a
+        flg = true
+        room.reserved_dates.map(&:reserved_date).each do |rd|
+          if check.include?(rd)
+            flg = false
+            break
+          end
+        end
+        ids << room.id if flg == true
+      end
+      @rooms = @rooms.where(id: ids)
     end
 
     if params[:stay_num].present?
+      @rooms = @rooms.select{|room| room.max_stay_num >= params[:stay_num].to_i}
     end
 
     if params[:max_price].present?
+      @rooms = @rooms.select{|room| params[:max_price].to_i >= room.price}
     end
 
-    if params[:options_id].present?
+    if params[:option_id].present?
+      ids = Option.find(params[:option_id]).rooms.ids
+      @rooms = @rooms.where(id: ids)
     end
 
     if params[:limit].present?
