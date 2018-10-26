@@ -1,6 +1,6 @@
 class Api::RoomsController < ApplicationController
   def index
-    @rooms = Room.sample_room
+    @rooms = Room.sample_rooms
 
     # カテゴリごとの部屋を抜き出す必要があったら処理を行う
     # 現状全て同じものを返している
@@ -27,27 +27,14 @@ class Api::RoomsController < ApplicationController
   end
 
   def show
+    room = Room.find(params[:id])
     @room = Room.sample_room
 
     render json: @room
   end
 
   def options
-    @options = [
-      {
-        id: 1,
-        name: 'レンタルシップ',
-        image_url: "https://ateamateam.herokuapp.com/images/sample_room.jpg"
-      }, {
-        id: 2,
-        name: 'イタリアンディナー',
-        image_url: "https://ateamateam.herokuapp.com/images/sample_room.jpg"
-      }, {
-        id: 3,
-        name: '中華料理',
-        image_url: "https://ateamateam.herokuapp.com/images/sample_room.jpg"
-      }
-    ]
+    @options = Option.all
 
     render json: @options
   end
