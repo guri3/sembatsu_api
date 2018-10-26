@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2018_10_19_032707) do
   end
 
   create_table "options", force: :cascade do |t|
-    t.string "title", null: false
+    t.string "name", null: false
     t.string "image_url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 2018_10_19_032707) do
     t.string "max_stay_num", null: false
     t.string "check_in_time", null: false
     t.string "check_out_time", null: false
-    t.integer "bed_room", null: false
+    t.integer "bed_room_num", null: false
     t.integer "bed_num", null: false
     t.integer "toilet_num", null: false
     t.integer "kitchen_num", null: false

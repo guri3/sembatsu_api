@@ -7,7 +7,7 @@ install:
 run:
 	docker-compose up
 
-rails/console:
+rails/c:
 	$(DRUN) rails c
 
 rails/routes:
