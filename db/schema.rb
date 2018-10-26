@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 2018_10_19_032707) do
     t.string "city", null: false
     t.decimal "latitude", precision: 9, scale: 6
     t.decimal "longitude", precision: 9, scale: 6
-    t.string "max_stay_num", null: false
+    t.integer "max_stay_num", null: false
     t.string "check_in_time", null: false
     t.string "check_out_time", null: false
     t.integer "bed_room_num", null: false

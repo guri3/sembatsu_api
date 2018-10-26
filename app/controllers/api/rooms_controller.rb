@@ -1,6 +1,6 @@
 class Api::RoomsController < ApplicationController
   def index
-    @rooms = Room.sample_rooms
+    @rooms = Room.all
 
     # カテゴリごとの部屋を抜き出す必要があったら処理を行う
     # 現状全て同じものを返している
@@ -22,12 +22,11 @@ class Api::RoomsController < ApplicationController
         render json: @rooms
       end
     else
-      render json: @rooms
+      render 'index', formats: 'json', handlers: 'jbuilder'
     end
   end
 
   def show
-    room = Room.find(params[:id])
     @room = Room.sample_room
 
     render json: @room
