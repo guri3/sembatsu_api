@@ -154,7 +154,7 @@ class Room < ApplicationRecord
       max_stay_num: 3,
       check_in_time: '9:00~',
       check_out_time: '~24:00',
-      bed_room: 2,
+      bed_room_num: 2,
       bed_num: 6,
       toilet_num: 2,
       kitchen_num: 1,
