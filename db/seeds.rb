@@ -263,4 +263,11 @@ Room.all.each do |room|
       body: 'おすすめです。'
     )
   end
+  ave_sum = 0
+  room.room_reviews.each do |rr|
+    ave = rr.satisfaction + rr.cleanliness + rr.cost_performance + rr.amenity + rr.location + rr.access
+    ave_sum += ave
+  end
+  room.review = (ave_sum.to_f / (room.room_reviews.size * 6)).round(1)
+  room.save!
 end

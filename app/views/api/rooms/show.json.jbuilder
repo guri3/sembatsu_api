@@ -35,12 +35,12 @@ json.options do
   end
 end
 json.reviews do
-  json.satisfaction @room.room_reviews.map(&:satisfaction).inject(:+)/@room.room_reviews.size.to_f.round(1)
-  json.cleanliness @room.room_reviews.map(&:cleanliness).inject(:+)/@room.room_reviews.size.to_f.round(1)
-  json.cost_performance @room.room_reviews.map(&:cost_performance).inject(:+)/@room.room_reviews.size.to_f.round(1)
-  json.amenity @room.room_reviews.map(&:amenity).inject(:+)/@room.room_reviews.size.to_f.round(1)
-  json.location @room.room_reviews.map(&:location).inject(:+)/@room.room_reviews.size.to_f.round(1)
-  json.access @room.room_reviews.map(&:access).inject(:+)/@room.room_reviews.size.to_f.round(1)
+  json.satisfaction (@room.room_reviews.map(&:satisfaction).inject(:+)/@room.room_reviews.size).to_f.round(1)
+  json.cleanliness (@room.room_reviews.map(&:cleanliness).inject(:+)/@room.room_reviews.size).to_f.round(1)
+  json.cost_performance (@room.room_reviews.map(&:cost_performance).inject(:+)/@room.room_reviews.size).to_f.round(1)
+  json.amenity (@room.room_reviews.map(&:amenity).inject(:+)/@room.room_reviews.size).to_f.round(1)
+  json.location (@room.room_reviews.map(&:location).inject(:+)/@room.room_reviews.size).to_f.round(1)
+  json.access (@room.room_reviews.map(&:access).inject(:+)/@room.room_reviews.size).to_f.round(1)
 end
 json.room_reviews do
   json.array! @room.room_reviews do |rr|
