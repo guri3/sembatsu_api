@@ -41,8 +41,8 @@ class Guest < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   # 関連
-  has_many :rooms, through: :reserves
   has_many :reserves
+  has_many :rooms, through: :reserves
 
   # アクセサ
 

@@ -246,3 +246,25 @@ Room.create(
 (Date.tomorrow..Date.new(2018, 11, -1)).each do |d|
   AvailableDate.create(room_id: 1, available_date: d)
 end
+
+Room.all.each do |room|
+  (Date.tomorrow..Date.new(2018, 11, -1)).each do |d|
+    room.available_dates.create(available_date: d)
+  end
+
+  Option.all.sample(5).each do |option|
+    RoomOption.create(room_id: room.id, option_id: option.id)
+  end
+
+  5.times do
+    room.room_reviews.create(
+      satisfaction: rand(0..5),
+      cleanliness: rand(0..5),
+      cost_performance: rand(0..5),
+      amenity: rand(0..5),
+      location: rand(0..5),
+      access: rand(0..5),
+      body: 'おすすめです。'
+    )
+  end
+end

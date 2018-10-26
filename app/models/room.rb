@@ -34,10 +34,10 @@ class Room < ApplicationRecord
   # 関連
   belongs_to :host
   has_many :available_dates
-  has_many :guests, through: :reserves
   has_many :reserves
-  has_many :options, through: :room_options
+  has_many :guests, through: :reserves
   has_many :room_options
+  has_many :options, through: :room_options
   has_many :room_reviews
 
   # アクセサ
