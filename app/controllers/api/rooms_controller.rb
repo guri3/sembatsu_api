@@ -111,4 +111,23 @@ class Api::RoomsController < ApplicationController
 
     render json: @options
   end
+
+  def reservation
+    json = JSON.parse(request.body.read)
+    from = Date.parse(json["from"])
+    to = Date.parse(json["to"])
+    reserve = Reserve.create(
+      guest_id: Guest.first,
+      room_id: json["room_id"],
+      from: from,
+      to: to,
+      reserve_date: Date.today
+    )
+    room = Room.find(json["room_id"])
+    (from..to).each do |date|
+      room.reserved_dates.create(reserved_date: date)
+    end
+
+    render json: { message: "予約が完了しました" }
+  end
 end
