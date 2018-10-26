@@ -25,7 +25,7 @@ json.child @room.child
 json.access @room.access
 json.price @room.price
 json.reserved_date do
-  json.array! @room.available_dates.map(&:available_date)
+  json.array! @room.reserved_dates.map(&:reserved_date)
 end
 json.options do
   json.array! @room.options do |option|

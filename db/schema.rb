@@ -15,14 +15,6 @@ ActiveRecord::Schema.define(version: 2018_10_19_032707) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "available_dates", force: :cascade do |t|
-    t.bigint "room_id"
-    t.date "available_date", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["room_id"], name: "index_available_dates_on_room_id"
-  end
-
   create_table "guests", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -116,6 +108,14 @@ ActiveRecord::Schema.define(version: 2018_10_19_032707) do
     t.index ["reserve_id"], name: "index_reserve_options_on_reserve_id"
   end
 
+  create_table "reserved_dates", force: :cascade do |t|
+    t.bigint "room_id"
+    t.date "reserved_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_reserved_dates_on_room_id"
+  end
+
   create_table "reserves", force: :cascade do |t|
     t.bigint "guest_id"
     t.bigint "room_id"
@@ -180,10 +180,10 @@ ActiveRecord::Schema.define(version: 2018_10_19_032707) do
     t.index ["host_id"], name: "index_rooms_on_host_id"
   end
 
-  add_foreign_key "available_dates", "rooms"
   add_foreign_key "host_reviews", "hosts"
   add_foreign_key "reserve_options", "options"
   add_foreign_key "reserve_options", "reserves", column: "reserve_id"
+  add_foreign_key "reserved_dates", "rooms"
   add_foreign_key "reserves", "guests"
   add_foreign_key "reserves", "rooms"
   add_foreign_key "room_options", "options"

@@ -12,10 +12,10 @@
 #  city            :string           not null
 #  latitude        :decimal(9, 6)
 #  longitude       :decimal(9, 6)
-#  max_stay_num    :string           not null
+#  max_stay_num    :integer          not null
 #  check_in_time   :string           not null
 #  check_out_time  :string           not null
-#  bed_room        :integer          not null
+#  bed_room_num    :integer          not null
 #  bed_num         :integer          not null
 #  toilet_num      :integer          not null
 #  kitchen_num     :integer          not null

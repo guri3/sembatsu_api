@@ -243,13 +243,9 @@ Room.create(
   ]
 )
 
-(Date.tomorrow..Date.new(2018, 11, -1)).each do |d|
-  AvailableDate.create(room_id: 1, available_date: d)
-end
-
 Room.all.each do |room|
-  (Date.tomorrow..Date.new(2018, 11, -1)).each do |d|
-    room.available_dates.create(available_date: d)
+  (Date.new(2018, 10, 1)..Date.today).each do |d|
+    room.reserved_dates.create(reserved_date: d)
   end
 
   Option.all.sample(5).each do |option|
