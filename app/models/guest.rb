@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: guests
@@ -26,14 +25,13 @@
 #  image                  :string
 #  email                  :string
 #  tokens                 :json
-#  gender                 :string           not null
-#  birthday               :date             not null
-#  city                   :string           not null
-#  country                :string           not null
+#  gender                 :string
+#  birthday               :date
+#  city                   :string
+#  country                :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
-
 
 class Guest < ActiveRecord::Base
   # Include default devise modules. Others available are:
@@ -41,4 +39,16 @@ class Guest < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  # 関連
+  has_many :rooms, through: :reserves
+  has_many :reserves
+
+  # アクセサ
+
+  # バリデーション
+
+  # スコープ
+
+  # クラスメソッド
 end

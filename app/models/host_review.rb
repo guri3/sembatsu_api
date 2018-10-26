@@ -10,5 +10,14 @@
 #
 
 class HostReview < ApplicationRecord
+  # 関連
   belongs_to :host
+
+  # アクセサ
+
+  # バリデーション
+
+  # スコープ
+
+  # クラスメソッド
 end
