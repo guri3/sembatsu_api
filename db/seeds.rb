@@ -21,29 +21,48 @@ Host.create(
 Option.create(
   [
     {
+      name: '中華料理',
+      image_url: 'https://ateamateam.herokuapp.com/images/Chinese.png'
+    },
+    {
+      name: 'オーガニック料理',
+      image_url: 'https://ateamateam.herokuapp.com/images/dinner.png'
+    },
+    {
+      name: '海鮮料理',
+      image_url: 'https://ateamateam.herokuapp.com/images/Fish.png'
+    },
+    {
       name: '懐石料理',
-      image_url: 'https://ateamateam.herokuapp.com/images/sample_room.jpg'
-    }, {
+      image_url: 'https://ateamateam.herokuapp.com/images/kaiseki.png'
+    },
+    {
       name: '郷土料理',
-      image_url: 'https://ateamateam.herokuapp.com/images/sample_room.jpg'
-    }, {
+      image_url: 'https://ateamateam.herokuapp.com/images/Party.png'
+    },
+    {
       name: 'イタリアン',
-      image_url: 'https://ateamateam.herokuapp.com/images/sample_room.jpg'
-    }, {
+      image_url: 'https://ateamateam.herokuapp.com/images/Italian.png'
+    },
+    {
       name: 'フレンチ',
-      image_url: 'https://ateamateam.herokuapp.com/images/sample_room.jpg'
-    }, {
+      image_url: 'https://ateamateam.herokuapp.com/images/French.png'
+    },
+    {
       name: 'お寿司',
-      image_url: "https://ateamateam.herokuapp.com/images/sample_room.jpg"
-    }, {
+      image_url: "https://ateamateam.herokuapp.com/images/Japanese.png"
+    },
+    {
       name: '黒毛和牛ステーキ',
-      image_url: "https://ateamateam.herokuapp.com/images/sample_room.jpg"
-    }, {
-      name: 'ふぐ料理',
-      image_url: "https://ateamateam.herokuapp.com/images/sample_room.jpg"
-    }, {
+      image_url: "https://ateamateam.herokuapp.com/images/steak.png"
+    },
+    # {
+    #   name: 'ふぐ料理',
+    #   image_url: "https://ateamateam.herokuapp.com/images/sukiyaki.png"
+    # },
+    {
       name: 'すき焼き',
-      image_url: "https://ateamateam.herokuapp.com/images/sample_room.jpg"
+      image_url: "https://ateamateam.herokuapp.com/images/sukiyaki.png"
     }
   ]
 )
