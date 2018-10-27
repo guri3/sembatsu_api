@@ -67,22 +67,7 @@ Option.create(
   ]
 )
 
-body1 = <<~EOS
-箱根の奥座敷、豊富な水を湛えた芦ノ湖と雄大な自然が五感に囁きかける。
-心地よいぬくもりに身を委ねれば花がほころぶようにふわりと心解き放たれる。
-EOS
-body2 = <<~EOS
-全てのナチュラル&マッドウォールハウス！立石東京駅周辺の綺麗な近所。
-多くのバーは、戦争直後から駅の近くに残っています。
-1940年代に東京がどのようなものだったかを感じることができます。
-主要スポットへのアクセス良好(15分~50分)
-EOS
-body3 = <<EOS
-都心にありながら、芝公園の豊かな緑に囲まれています。2018年3月リニューアル。大切な方と上質で特別な時間をお過ごしください。
-EOS
-body4 = <<~EOS
-那覇空港から車で約50分。沖縄でも有数の美しい観光スポットのほぼ中心。マリーナへも近く、マリンスポーツもより身近に楽しめるロケーション。近隣にはゴルフ場が控え、レジャースポットとしてのポテンシャルの高さを誇ります。沖縄を知る人の憧れでもあるこの地で素敵な時間を過ごしてみませんか？
-EOS
+body = "那覇空港から車で約50分。沖縄でも有数の美しい観光スポットのほぼ中心。マリーナへも近く、マリンスポーツもより身近に楽しめるロケーション。近隣にはゴルフ場が控え、レジャースポットとしてのポテンシャルの高さを誇ります。沖縄を知る人の憧れでもあるこの地で素敵な時間を過ごしてみませんか？"
 child = <<~EOS
 ご使用いただけます。
 12歳以下のお子様は一律1,620円(税込)の施設利用料が掛かります。
@@ -93,17 +78,13 @@ child = <<~EOS
 ※添い寝は0～12歳（小学生）までご利用いただけます。13歳以上（中学生）は大人でご予約下さい。
 ※新棟「月の道」は6歳以上のご利用となります。
 EOS
-access1 = <<~EOS
-バス停まで歩いておよそ17分。
-駐車場は無料です。6台は停められる余裕があります。
-EOS
-access2 = <<~EOS
-バス停まで歩いておよそ10分。
-EOS
-access3 = <<~EOS
-最寄り駅まで徒歩5分
-駐車場は無料です。6台分用意してあります。
-EOS
+accesses = [
+  "バス停まで歩いておよそ17分。\n
+  駐車場は無料です。6台は停められる余裕があります。",
+  "バス停まで歩いておよそ10分",
+  "最寄り駅まで徒歩5分\n
+  駐車場は無料です。6台分用意してあります。"
+]
 
 host_id = Host.first.id
 Room.create(
@@ -112,7 +93,7 @@ Room.create(
       host_id: host_id,
       title: '湘南の海が一望できる別荘で素敵な休日を過ごしませんか？',
       registration_id: 'M0000001',
-      body: body1,
+      body: "箱根の奥座敷、豊富な水を湛えた芦ノ湖と雄大な自然が五感に囁きかける。\n心地よいぬくもりに身を委ねれば花がほころぶようにふわりと心解き放たれる。",
       image_url: 'https://ateamateam.herokuapp.com/images/room1.jpg',
       prefecture: '神奈川県',
       city: '箱根',
@@ -129,17 +110,17 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access1,
-      price: 35000,
+      access: accesses.sample,
+      price: rand(30000..50000).round(-2),
     },
     {
       host_id: host_id,
       title: '広大な自然に包まれ心からリラックスできる時間を',
       registration_id: 'M0000002',
-      body: body2,
+      body: "全てのナチュラル&マッドウォールハウス！立石東京駅周辺の綺麗な近所。\n多くのバーは、戦争直後から駅の近くに残っています。\n1940年代に東京がどのようなものだったかを感じることができます。\n主要スポットへのアクセス良好(15分~50分)",
       image_url: 'https://ateamateam.herokuapp.com/images/room2.jpg',
-      prefecture: '神奈川県',
-      city: '箱根',
+      prefecture: '東京都',
+      city: '東京',
       latitude: 35.239728,
       longitude: 139.049642,
       max_stay_num: 3,
@@ -153,17 +134,17 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access2,
-      price: 35000,
+      access: accesses.sample,
+      price: rand(30000..50000).round(-2),
     },
     {
       host_id: host_id,
-      title: '湘南の海が一望できる別荘で素敵な休日を過ごしませんか？',
+      title: '素敵な夜景とともに過ごす夜',
       registration_id: 'M0000003',
-      body: body3,
+      body: "東京タワーが一望できる好立地。\n素敵な夜景で特別な日を演出します。",
       image_url: 'https://ateamateam.herokuapp.com/images/room3.jpg',
-      prefecture: '神奈川県',
-      city: '箱根',
+      prefecture: '東京都',
+      city: '東京',
       latitude: 35.239728,
       longitude: 139.049642,
       max_stay_num: 3,
@@ -177,17 +158,17 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access1,
-      price: 35000,
+      access: accesses.sample,
+      price: rand(30000..50000).round(-2),
     },
     {
       host_id: host_id,
-      title: '湘南の海が一望できる別荘で素敵な休日を過ごしませんか？',
+      title: 'プライベートビーチのように美しい海を独占',
       registration_id: 'M0000004',
-      body: body4,
+      body: "美しいビーチまで徒歩わずか30秒。まるでプライベートビーチのように独占していただけます。\nオーシャンビューの邸宅をまるごとお貸しする、別荘スタイルのリゾートレジデンス。\n海とつながるようなプライベート温水プール、BBQが楽しめるガーデン、美しい海を眺めるテラス付きです。\n一日一組様限定、大切な方とプライベートな空間で至福のひとときをお過ごしください。",
       image_url: 'https://ateamateam.herokuapp.com/images/room4.jpg',
-      prefecture: '神奈川県',
-      city: '箱根',
+      prefecture: '沖縄県',
+      city: '名護',
       latitude: 35.239728,
       longitude: 139.049642,
       max_stay_num: 3,
@@ -201,17 +182,17 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access1,
-      price: 35000,
+      access: accesses.sample,
+      price: rand(30000..50000).round(-2),
     },
     {
       host_id: host_id,
-      title: '湘南の海が一望できる別荘で素敵な休日を過ごしませんか？',
+      title: 'ここにしかない美しいサンセットの海を望む',
       registration_id: 'M0000005',
-      body: body1,
-      image_url: 'https://ateamateam.herokuapp.com/images/room1.jpg',
-      prefecture: '神奈川県',
-      city: '箱根',
+      body: "一棟ずつ独立したヴィラにご用意したのは、リゾート感あふれる温水プライベートプールに、\nオーシャンビューを独り占めするルーフテラス、寛ぎのデイベッド。\nそして、誰にも邪魔されずに楽しむ、佐和田の浜の美しいサンセット。\nご滞在中は、お客様だけのプライベートな空間となります。\n離島ならではの美しい風景とともに、大切な方と幸せな時をお過ごしください。",
+      image_url: 'https://ateamateam.herokuapp.com/images/room5.jpg',
+      prefecture: '沖縄県',
+      city: '伊良部島',
       latitude: 35.239728,
       longitude: 139.049642,
       max_stay_num: 3,
@@ -225,17 +206,18 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access1,
-      price: 35000,
+      access: accesses.sample,
+      price: rand(30000..50000).round(-2),
     },
     {
       host_id: host_id,
-      title: '湘南の海が一望できる別荘で素敵な休日を過ごしませんか？',
+      title: 'ここにしかない時間が流れる至極のひととき。',
       registration_id: 'M0000006',
-      body: body2,
-      image_url: 'https://ateamateam.herokuapp.com/images/room2.jpg',
-      prefecture: '神奈川県',
-      city: '箱根',
+      body: "窓の向こうに広がる太平洋。\nそして、よく晴れた日には富士山を望むことができます。
+      五感を研ぎ澄ませ、自然と戯れる。\nここモントレーハウスには、ホテルや旅館で味わえない特別な時間が流れています。",
+      image_url: 'https://ateamateam.herokuapp.com/images/room6.jpg',
+      prefecture: '千葉県',
+      city: '館山',
       latitude: 35.239728,
       longitude: 139.049642,
       max_stay_num: 3,
@@ -249,17 +231,17 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access1,
-      price: 35000,
+      access: accesses.sample,
+      price: rand(30000..50000).round(-2),
     },
     {
       host_id: host_id,
-      title: '湘南の海が一望できる別荘で素敵な休日を過ごしませんか？',
+      title: '逗子駅より徒歩10分！絶景オーシャンビューの逗子の高級別荘',
       registration_id: 'M0000007',
-      body: body3,
-      image_url: 'https://ateamateam.herokuapp.com/images/room3.jpg',
+      body: "2018年3月OPEN！\n逗子駅より徒歩10分という好立地に高級別荘が誕生いたしました。\n目の前には湘南の海が広がっており、ビーチへ降り立つことができます。\n豪華別荘で最高の休日をお過ごしください。",
+      image_url: 'https://ateamateam.herokuapp.com/images/room7.jpg',
       prefecture: '神奈川県',
-      city: '箱根',
+      city: '逗子',
       latitude: 35.239728,
       longitude: 139.049642,
       max_stay_num: 3,
@@ -273,8 +255,80 @@ Room.create(
       amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
       pet: 'ご一緒に宿泊できます。',
       child: child,
-      access: access1,
-      price: 35000,
+      access: accesses.sample,
+      price: rand(30000..50000).round(-2),
+    },
+    {
+      host_id: host_id,
+      title: '光と水の邸宅',
+      registration_id: 'M0000008',
+      body: "古都鎌倉の一軒家で暮らすように滞在出来る。鎌倉の名所が徒歩圏内に目白押し。\n泊まるからこそ、見つかる新しい古都の魅力。\nBOSEの音響設備・大画面テレビで迫力ある音と映像を堪能。\n「Kanagawa Brand Collection 2017」に唯一掲載された貸別荘。",
+      image_url: 'https://ateamateam.herokuapp.com/images/room8.jpg',
+      prefecture: '神奈川県',
+      city: '鎌倉',
+      latitude: 35.239728,
+      longitude: 139.049642,
+      max_stay_num: 3,
+      check_in_time: '9:00~',
+      check_out_time: '~24:00',
+      bed_room_num: 2,
+      bed_num: 6,
+      toilet_num: 2,
+      kitchen_num: 1,
+      facilyty: 'Wi-Fi,洗濯機',
+      amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
+      pet: 'ご一緒に宿泊できます。',
+      child: child,
+      access: accesses.sample,
+      price: rand(30000..50000).round(-2),
+    },
+    {
+      host_id: host_id,
+      title: '羊蹄山を望む6LDKのラグジュアリーな豪邸を一棟貸切',
+      registration_id: 'M0000009',
+      body: "6つの寝室と複数の空間から成り立つ礎石は、大規模なグループや多人数のご家族での利用に最適な高級別荘です。 2018年に完成し、日本建築の美とモダンなイタリア家具を同時にお楽しみいただけます。リビングダイニングからは壮大な羊蹄山の景色をご覧いただけます。",
+      image_url: 'https://ateamateam.herokuapp.com/images/room9.jpg',
+      prefecture: '北海道',
+      city: 'ニセコ',
+      latitude: 35.239728,
+      longitude: 139.049642,
+      max_stay_num: 3,
+      check_in_time: '9:00~',
+      check_out_time: '~24:00',
+      bed_room_num: 2,
+      bed_num: 6,
+      toilet_num: 2,
+      kitchen_num: 1,
+      facilyty: 'Wi-Fi,洗濯機',
+      amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
+      pet: 'ご一緒に宿泊できます。',
+      child: child,
+      access: accesses.sample,
+      price: rand(30000..50000).round(-2),
+    },
+    {
+      host_id: host_id,
+      title: '北海道の美しい景色を堪能する',
+      registration_id: 'M0000010',
+      body: "NEST AT THE TREESはニセコマウンテンリゾート グラン・ヒラフとニセコ・ビレッジから車で8分の場所に位置し、半月湖畔自然公園とニセコアンヌプリ国際スキー場まで車で15分以内です。\nホテルには大浴場があり、北海道の美しい景色を望めます。\n館内のスキー用具置き場を利用することができ、館内レストランではビュッフェ式朝食を用意しています。\n夏季にはゴルフやラフティング、冬季にはスキーやスノーシューイングなどのアクティビティを楽しめます。\n新千歳空港まで80kmと、アクセス至便の環境です。",
+      image_url: 'https://ateamateam.herokuapp.com/images/room10.jpg',
+      prefecture: '北海道',
+      city: 'ニセコ',
+      latitude: 35.239728,
+      longitude: 139.049642,
+      max_stay_num: 3,
+      check_in_time: '9:00~',
+      check_out_time: '~24:00',
+      bed_room_num: 2,
+      bed_num: 6,
+      toilet_num: 2,
+      kitchen_num: 1,
+      facilyty: 'Wi-Fi,洗濯機',
+      amenity: 'シャンプー・リンス,ボディソープ・石鹸,ボディタオル,ハミガキセット,シャワーキャップ,ドライヤー',
+      pet: 'ご一緒に宿泊できます。',
+      child: child,
+      access: accesses.sample,
+      price: rand(30000..50000).round(-2),
     }
   ]
 )
@@ -284,19 +338,28 @@ Room.all.each do |room|
     room.reserved_dates.create(reserved_date: d)
   end
 
-  Option.all.sample(5).each do |option|
+  Option.all.sample(8).each do |option|
     RoomOption.create(room_id: room.id, option_id: option.id)
   end
 
-  5.times do
+  review_bodys = [
+    "施設やホテルの中も素晴らしいのはもちろんなのですが、ご担当の方がとても親切で、素敵なおもてなしをして頂きました。幸せな誕生日になりました。本当にありがとうございます。",
+    "心のお洗濯ができました！\n子どもたちもプライベートプールで、朝から夜まで思う存分遊べました！！\n星空も素敵でした。本当に素敵なロケーションです！！！\nまた利用させてもらいたいです。",
+    "まさにテラスハウス。\n最高の旅行になりました。",
+    "７月の３連休に友人グループで利用させていただき、とても素敵な休日を過ごすことができました。
+    目の前が海のロケーションと、モダンでおしゃれなデザイナーズハウスにテンションがあがり、特に全面ガラス張りのリビングルームは、インテリアも上品で写真以上の解放感とラグジュアリー感でした。テラスでは夕日を見ながらBBQをしたり、別荘を最大限に満喫しました。ビーチへの移動も簡単で、夏のレジャーには最適です！",
+    "5月22日から、主人と1泊で利用しました。初めてのバケーションレンタルでしたが、本当に最高でした。海が目の前に広がり癒されました。飲み物等も、充実しており主人は、殆ど飲んでしまいました。申し訳ありません。対応して下さった方も、本当にいい方で最初から最後までいい旅行ができました。また、利用したいです。その際はまたよろしくお願いします。"
+  ]
+
+  5.times do |i|
     room.room_reviews.create(
-      satisfaction: rand(0..5),
-      cleanliness: rand(0..5),
-      cost_performance: rand(0..5),
-      amenity: rand(0..5),
-      location: rand(0..5),
-      access: rand(0..5),
-      body: 'おすすめです。'
+      satisfaction: rand(3..5),
+      cleanliness: rand(3..5),
+      cost_performance: rand(3..5),
+      amenity: rand(3..5),
+      location: rand(3..5),
+      access: rand(3..5),
+      body: review_bodys[i]
     )
   end
   ave_sum = 0
