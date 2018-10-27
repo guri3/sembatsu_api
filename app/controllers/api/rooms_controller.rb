@@ -56,7 +56,7 @@ class Api::RoomsController < ApplicationController
 
     if params[:place].present?
       ids = @rooms.where('prefecture LIKE ?', "%#{params[:place]}%").ids
-      ids << @rooms.where('city LIKE ?', "%#{prams[:place]}%").ids
+      ids << @rooms.where('city LIKE ?', "%#{params[:place]}%").ids
       @rooms = @rooms.where(id: ids.flatten)
     end
 
