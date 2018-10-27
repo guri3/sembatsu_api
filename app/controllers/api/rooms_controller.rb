@@ -16,7 +16,7 @@ class Api::RoomsController < ApplicationController
         ids = id_location_set.map{|o| o[0]}
         @rooms = ids.collect {|id| @rooms.detect {|x| x.id == id.to_i}}
       when 'inexpensive'
-        @rooms = @rooms.order('price DESC')
+        @rooms = @rooms.order('price')
       when 'accessible'
         id_access_set = []
         @rooms.each do |room|
