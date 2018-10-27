@@ -215,7 +215,7 @@ Room.create(
       registration_id: 'M0000006',
       body: "窓の向こうに広がる太平洋。\nそして、よく晴れた日には富士山を望むことができます。
       五感を研ぎ澄ませ、自然と戯れる。\nここモントレーハウスには、ホテルや旅館で味わえない特別な時間が流れています。",
-      image_url: 'https://ateamateam.herokuapp.com/images/room6.jpg',
+      image_url: 'https://ateamateam.herokuapp.com/images/room6.JPG',
       prefecture: '千葉県',
       city: '館山',
       latitude: 35.239728,
